@@ -1,26 +1,52 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <QuestionPage
+      :question="question.question"
+      @yes="chooseYes"
+      @no="chooseNo"
+      v-if="showQuestion"
+    ></QuestionPage>
+
+    <AnswerPage
+      :answer="question.answer"
+      :choice="choice"
+      @next="nextQuestion"
+      v-else
+    ></AnswerPage>
+
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import QuestionPage from './pages/QuestionPage.vue';
+import AnswerPage from './pages/AnswerPage.vue';
+import { newQuestion } from './questions';
+import { ref } from 'vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+const question = ref(newQuestion());
+const showQuestion = ref(true);
+const choice = ref('');
+
+const chooseYes = () => {
+  choice.value = 'yes';
+  showQuestion.value = false;
+}
+const chooseNo = () => {
+  choice.value = 'no';
+  showQuestion.value = false;
+}
+
+const nextQuestion = () => {
+  choice.value = '';
+  showQuestion.value = true;
+  question.value = newQuestion();
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 </style>
