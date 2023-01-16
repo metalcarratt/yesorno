@@ -3,20 +3,28 @@ export enum AnswerType {
     Normal = 'normal'
 }
 
+export interface Question {
+    text: string,
+    audio: any
+}
+
 export interface Answer {
     type: string,
     yes: string,
     no: string
 }
 
-export interface Question {
-    question: string,
+export interface QA {
+    question: Question,
     answer: Answer
 }
 
-const list = [
+const list : QA[] = [
     {
-        question: "Do you like poo?",
+        question: {
+            text: "Do you like poo?",
+            audio: new Audio( require('@/assets/audio/poo-question.mp3') )
+        },
         answer: {
             type: AnswerType.Gross,
             yes: 'Eww, you like poo?',
@@ -24,7 +32,10 @@ const list = [
         }
     },
     {
-        question: "Do you like eating mud?",
+        question: {
+            text: "Do you like eating mud?",
+            audio: new Audio( require('@/assets/audio/mud-question.mp3') )
+        },
         answer: {
             type: AnswerType.Gross,
             yes: 'Eww, you like eating mud?',
@@ -32,7 +43,10 @@ const list = [
         }
     },
     {
-        question: "Do you like pizza?",
+        question: {
+            text: "Do you like pizza?",
+            audio: new Audio( require('@/assets/audio/pizza-question.mp3') )
+        },
         answer: {
             type: AnswerType.Normal,
             yes: 'Nice, I like pizza too.',
@@ -40,7 +54,10 @@ const list = [
         }
     },
     {
-        question: "Do you like eating rice?",
+        question: {
+            text: "Do you like eating rice?",
+            audio: new Audio( require('@/assets/audio/rice-question.mp3') )
+        },
         answer: {
             type: AnswerType.Normal,
             yes: 'Nice, I like eating rice too.',
@@ -49,7 +66,7 @@ const list = [
     }
 ]
 
-export const newQuestion = () : Question => {
+export const newQuestion = () : QA => {
     const r = Math.floor(Math.random() * list.length);
     return list[r];
 }

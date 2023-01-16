@@ -1,7 +1,8 @@
 <template>
     <div class="bg">
         <div class="playArea">
-            <h1>{{ props.question }}</h1>
+            <h1>{{ props.question.text }}</h1>
+            <a @click.prevent="playSound" href="#">Play sound</a>
             <div class="btns">
                 <button @click="emit('yes')">Yes</button>
                 <button @click="emit('no')">No</button>
@@ -12,12 +13,20 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue';
+import { Question } from '@/questions';
 
 const props = defineProps({
-    question: String
+    question: Question
 });
 
 const emit = defineEmits(['yes', 'no']);
+
+const playSound = () => {
+    props.question.audio.play();
+}
+
+playSound();
+
 </script>
 
 <style scoped>
