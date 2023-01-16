@@ -40,6 +40,14 @@ const emit = defineEmits(['yes', 'no']);
     justify-content: space-between;
 }
 
+@media (max-width: 800px) {
+    .playArea {
+        padding: 10px;
+        height: calc(100% - 20px);
+    }
+}
+
+
 h1 {
     font-size: 48px;
     font-family: Poppins;
