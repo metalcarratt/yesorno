@@ -1,8 +1,7 @@
 <template>
     <div class="bg">
         <div class="playArea">
-            <h1>{{ props.question.text }}</h1>
-            <a @click.prevent="playSound" href="#">Play sound</a>
+            <h1>{{ props.question.text }} <a @click.prevent="playSound" href="#">Listen</a></h1>
             <div class="btns">
                 <button @click="emit('yes')">Yes</button>
                 <button @click="emit('no')">No</button>
@@ -61,6 +60,11 @@ h1 {
     font-size: 48px;
     font-family: Poppins;
 }
+
+h1 a {
+    font-size: 16px;
+}
+
 .btns {
     width: 100%;
     display: flex;

@@ -11,7 +11,9 @@ export interface Question {
 export interface Answer {
     type: string,
     yes: string,
-    no: string
+    yesAudio: any,
+    no: string,
+    noAudio: any
 }
 
 export interface QA {
@@ -28,18 +30,22 @@ const list : QA[] = [
         answer: {
             type: AnswerType.Gross,
             yes: 'Eww, you like poo?',
-            no: 'Phew, you don\'t like poo.'
+            yesAudio: new Audio( require('@/assets/audio/poo-yes-answer.mp3') ),
+            no: 'Phew, you don\'t like poo.',
+            noAudio: new Audio( require('@/assets/audio/poo-no-answer.mp3') )
         }
     },
     {
         question: {
-            text: "Do you like eating mud?",
-            audio: new Audio( require('@/assets/audio/mud-question.mp3') )
+            text: "Do you like eating dirt?",
+            audio: new Audio( require('@/assets/audio/dirt-question.mp3') )
         },
         answer: {
             type: AnswerType.Gross,
-            yes: 'Eww, you like eating mud?',
-            no: 'Phew, you don\'t like eating mud.'
+            yes: 'Eww, you like eating dirt?',
+            yesAudio: new Audio( require('@/assets/audio/dirt-yes-answer.mp3') ),
+            no: 'Phew, you don\'t like eating dirt.',
+            noAudio: new Audio( require('@/assets/audio/dirt-no-answer.mp3') )
         }
     },
     {
@@ -50,7 +56,9 @@ const list : QA[] = [
         answer: {
             type: AnswerType.Normal,
             yes: 'Nice, I like pizza too.',
-            no: 'You don\'t like pizza? Too bad.'
+            yesAudio: new Audio( require('@/assets/audio/pizza-yes-answer.mp3') ),
+            no: 'You don\'t like pizza? Too bad.',
+            noAudio: new Audio( require('@/assets/audio/pizza-no-answer.mp3') )
         }
     },
     {
@@ -61,7 +69,9 @@ const list : QA[] = [
         answer: {
             type: AnswerType.Normal,
             yes: 'Nice, I like eating rice too.',
-            no: 'You don\'t like eating rice? Too bad.'
+            yesAudio: new Audio( require('@/assets/audio/rice-yes-answer.mp3') ),
+            no: 'You don\'t like eating rice? Too bad.',
+            noAudio: new Audio( require('@/assets/audio/rice-no-answer.mp3') )
         }
     }
 ]

@@ -1,7 +1,7 @@
 <template>
     <div :class="bgClass()">
         <div class="playArea">
-            <h1>{{ answer }}</h1>
+            <h1>{{ answer }} <a @click.prevent="playSound" href="#">Listen</a></h1>
             <button @click="emit('next')">Next</button>
         </div>
     </div>
@@ -37,6 +37,17 @@ const bgClass = () => {
     }
     return classes;
 }
+
+const playSound = () => {
+    if (props.choice === 'yes') {
+        props.answer.yesAudio.play();
+    } else {
+        props.answer.noAudio.play();
+    }
+}
+
+playSound();
+
 </script>
 
 <style scoped>
@@ -85,6 +96,10 @@ const bgClass = () => {
 h1 {
     font-size: 48px;
     font-family: Poppins;
+}
+
+h1 a {
+    font-size: 16px;
 }
 
 button {
