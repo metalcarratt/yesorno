@@ -1,10 +1,10 @@
 <template>
     <div class="bg">
         <div class="playArea">
-            <h1>{{ props.question.text }} <a @click.prevent="playSound" href="#">Listen</a></h1>
+            <h1>{{ props.question.text }} <a @click.prevent="playSound" href="#">다시 듣기</a></h1>
             <div class="btns">
-                <button @click="emit('yes')">Yes</button>
-                <button @click="emit('no')">No</button>
+                <button @click="emit('yes')">Yes / 예</button>
+                <button @click="emit('no')">No / 아니요</button>
             </div>
         </div>
     </div>
@@ -63,6 +63,7 @@ h1 {
 
 h1 a {
     font-size: 16px;
+    color: #f0adad;
 }
 
 .btns {

@@ -1,8 +1,8 @@
 <template>
     <div :class="bgClass()">
         <div class="playArea">
-            <h1>{{ answer }} <a @click.prevent="playSound" href="#">Listen</a></h1>
-            <button @click="emit('next')">Next</button>
+            <h1>{{ answer }} <a @click.prevent="playSound" href="#">다시 듣기</a></h1>
+            <button @click="emit('next')">Next / 다음</button>
         </div>
     </div>
 </template>
@@ -100,6 +100,7 @@ h1 {
 
 h1 a {
     font-size: 16px;
+    color: #f0adad;
 }
 
 button {
