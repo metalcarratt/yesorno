@@ -1,10 +1,11 @@
 <template>
     <div class="bg">
         <div class="playArea">
-            <h1>{{ props.question.text }} <a @click.prevent="playSound" href="#">다시 듣기</a></h1>
+            <SpeechBox @playSound="playSound" theme="purple">{{ props.question.text }}</SpeechBox>
+            <CharacterImage character="boy-question"/>
             <div class="btns">
-                <button @click="emit('yes')">Yes / 예</button>
-                <button @click="emit('no')">No / 아니요</button>
+                <ButtonBox @click="emit('yes')">Yes / 예</ButtonBox>
+                <ButtonBox @click="emit('no')">No / 아니요</ButtonBox>
             </div>
         </div>
     </div>
@@ -12,6 +13,9 @@
 
 <script setup>
 import { defineProps, defineEmits } from 'vue';
+import SpeechBox from '@/components/SpeechBox.vue';
+import ButtonBox from '@/components/ButtonBox.vue';
+import CharacterImage from '@/components/CharacterImage.vue';
 import { Question } from '@/questions';
 
 const props = defineProps({
@@ -46,6 +50,7 @@ playSound();
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 @media (max-width: 800px) {
@@ -55,27 +60,11 @@ playSound();
     }
 }
 
-
-h1 {
-    font-size: 48px;
-    font-family: Poppins;
-}
-
-h1 a {
-    font-size: 16px;
-    color: #f0adad;
-}
-
 .btns {
     width: 100%;
     display: flex;
     flex-direction: row;
-}
-
-button {
-    width: 100%;
-    height: 100px;
-    font-size: 20px;
+    gap: 10px;
 }
 
 </style>

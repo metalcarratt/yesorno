@@ -1,14 +1,18 @@
 <template>
     <div :class="bgClass()">
         <div class="playArea">
-            <h1>{{ answer }} <a @click.prevent="playSound" href="#">다시 듣기</a></h1>
-            <button @click="emit('next')">Next / 다음</button>
+            <SpeechBox @playSound="playSound" :theme="theme()">{{ answer }}</SpeechBox>
+            <CharacterImage :character="character()"/>
+            <ButtonBox @click="emit('next')">Next / 다음</ButtonBox>
         </div>
     </div>
 </template>
 
 <script setup>
 import Answer from '../questions';
+import SpeechBox from '@/components/SpeechBox.vue';
+import ButtonBox from '@/components/ButtonBox.vue';
+import CharacterImage from '@/components/CharacterImage.vue';
 import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
@@ -20,21 +24,25 @@ const emit = defineEmits(['next']);
 
 const answer = props.choice === 'yes' ? props.answer.yes : props.answer.no;
 
-const bgClass = () => {
-    const classes = ['bg'];
+const theme = () => {
     if (props.answer.type === 'gross') {
         if (props.choice === 'yes') {
-            classes.push('eww');
+            return 'red'
         } else {
-            classes.push('lucky');
+            return 'yellow'
         }
     } else {
         if (props.choice === 'yes') {
-            classes.push('like');
+            return 'green';
         } else {
-            classes.push('dislike');
+            return 'blue';
         }
     }
+}
+
+const bgClass = () => {
+    const classes = ['bg'];
+    classes.push(theme());
     return classes;
 }
 
@@ -46,13 +54,21 @@ const playSound = () => {
     }
 }
 
+const character = () => {
+    if (theme() === 'red') {
+        return 'girl-laugh';
+    } else if (theme() === 'yellow' || theme() === 'green') {
+        return 'girl-agree';
+    } else {
+        return 'girl-sad';
+    }
+}
+
 playSound();
 
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 .bg {
     background-color: #500d56;
     color: white;
@@ -62,28 +78,29 @@ playSound();
     justify-content: center;
 }
 
-.bg.eww {
+.bg.red {
     background-color: #981710;
 }
 
-.bg.lucky {
+.bg.yellow {
     background-color: #deac17;
 }
 
-.bg.like {
+.bg.green {
     background-color: #17a017;
 }
 
-.bg.dislike {
+.bg.blue {
     background-color: #4e4ec5;
 }
 
 .playArea {
     width: 800px;
-    height: 400px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 @media (max-width: 800px) {
@@ -91,16 +108,6 @@ playSound();
         padding: 10px;
         height: calc(100% - 20px);
     }
-}
-
-h1 {
-    font-size: 48px;
-    font-family: Poppins;
-}
-
-h1 a {
-    font-size: 16px;
-    color: #f0adad;
 }
 
 button {
