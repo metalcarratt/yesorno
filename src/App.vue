@@ -1,43 +1,48 @@
 <template>
 
+    <TitlePage
+      v-if="nav.at(Page.Title)"
+    />
+
     <QuestionPage
       :question="question.question"
       @yes="chooseYes"
       @no="chooseNo"
-      v-if="showQuestion"
-    ></QuestionPage>
+      v-else-if="nav.at(Page.Question)"
+    />
 
     <AnswerPage
       :answer="question.answer"
       :choice="choice"
       @next="nextQuestion"
-      v-else
-    ></AnswerPage>
+      v-else-if="nav.at(Page.Answer)"
+    />
 
 </template>
 
 <script setup>
+import TitlePage from './pages/TitlePage.vue';
 import QuestionPage from './pages/QuestionPage.vue';
 import AnswerPage from './pages/AnswerPage.vue';
 import { newQuestion } from './questions';
 import { ref } from 'vue';
+import nav, { Page } from '@/utils/nav';
 
 const question = ref(newQuestion());
-const showQuestion = ref(true);
 const choice = ref('');
 
 const chooseYes = () => {
   choice.value = 'yes';
-  showQuestion.value = false;
+  nav.goto(Page.Answer);
 }
 const chooseNo = () => {
   choice.value = 'no';
-  showQuestion.value = false;
+  nav.goto(Page.Answer);
 }
 
 const nextQuestion = () => {
   choice.value = '';
-  showQuestion.value = true;
+  nav.goto(Page.Question);
   question.value = newQuestion();
 }
 </script>

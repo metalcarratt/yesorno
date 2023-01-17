@@ -40,6 +40,10 @@ const props = defineProps({
     background-color: #4e4ec5;
 }
 
+.bg.grey {
+    background-color: #dedbd1;
+}
+
 .playArea {
     width: 800px;
     height: 400px;
