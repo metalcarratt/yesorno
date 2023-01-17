@@ -32,6 +32,13 @@ h1 {
     font-family: Poppins;
 }
 
+@media (max-width: 560px) {
+    h1 {
+        font-size: 30px;
+        padding: 10px;
+    }
+}
+
 h1.yellow {
     background-color: #e3e3c9;
     color: #c2911a;
