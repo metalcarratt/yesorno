@@ -2,7 +2,7 @@
     <div class="bg">
         <div class="playArea">
             <SpeechBox @playSound="playSound" theme="purple">{{ props.question.text }}</SpeechBox>
-            <CharacterImage character="boy-question"/>
+            <CharacterImage :character="character()"/>
             <div class="btns">
                 <ButtonBox @click="emit('yes')">Yes / 예</ButtonBox>
                 <ButtonBox @click="emit('no')">No / 아니요</ButtonBox>
@@ -26,6 +26,14 @@ const emit = defineEmits(['yes', 'no']);
 
 const playSound = () => {
     props.question.audio.play();
+}
+
+const character = () => {
+    if (props.question.chara === 'boy') {
+        return 'boy-question';
+    } else {
+        return 'girl-question';
+    }
 }
 
 playSound();

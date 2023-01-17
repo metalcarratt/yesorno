@@ -5,7 +5,8 @@ export enum AnswerType {
 
 export interface Question {
     text: string,
-    audio: any
+    audio: any,
+    chara: string
 }
 
 export interface Answer {
@@ -25,7 +26,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like poo?",
-            audio: new Audio( require('@/assets/audio/poo-question.mp3') )
+            audio: new Audio( require('@/assets/audio/poo-question.mp3') ),
+            chara: 'boy'
         },
         answer: {
             type: AnswerType.Gross,
@@ -38,7 +40,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like eating dirt?",
-            audio: new Audio( require('@/assets/audio/dirt-question.mp3') )
+            audio: new Audio( require('@/assets/audio/dirt-question.mp3') ),
+            chara: 'boy'
         },
         answer: {
             type: AnswerType.Gross,
@@ -51,7 +54,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like pizza?",
-            audio: new Audio( require('@/assets/audio/pizza-question.mp3') )
+            audio: new Audio( require('@/assets/audio/pizza-question.mp3') ),
+            chara: 'boy'
         },
         answer: {
             type: AnswerType.Normal,
@@ -64,7 +68,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like eating rice?",
-            audio: new Audio( require('@/assets/audio/rice-question.mp3') )
+            audio: new Audio( require('@/assets/audio/rice-question.mp3') ),
+            chara: 'boy'
         },
         answer: {
             type: AnswerType.Normal,
@@ -77,7 +82,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like noodles?",
-            audio: new Audio( require('@/assets/audio/noodles-question.mp3') )
+            audio: new Audio( require('@/assets/audio/noodles-question.mp3') ),
+            chara: 'girl'
         },
         answer: {
             type: AnswerType.Normal,
@@ -90,7 +96,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like speaking English?",
-            audio: new Audio( require('@/assets/audio/english-question.mp3') )
+            audio: new Audio( require('@/assets/audio/english-question.mp3') ),
+            chara: 'girl'
         },
         answer: {
             type: AnswerType.Normal,
@@ -103,7 +110,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like living in Korea?",
-            audio: new Audio( require('@/assets/audio/korea-question.mp3') )
+            audio: new Audio( require('@/assets/audio/korea-question.mp3') ),
+            chara: 'girl'
         },
         answer: {
             type: AnswerType.Normal,
@@ -116,7 +124,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like wee?",
-            audio: new Audio( require('@/assets/audio/wee-question.mp3') )
+            audio: new Audio( require('@/assets/audio/wee-question.mp3') ),
+            chara: 'girl'
         },
         answer: {
             type: AnswerType.Gross,
@@ -129,7 +138,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like farts?",
-            audio: new Audio( require('@/assets/audio/farts-question.mp3') )
+            audio: new Audio( require('@/assets/audio/farts-question.mp3') ),
+            chara: 'girl'
         },
         answer: {
             type: AnswerType.Gross,
@@ -142,7 +152,8 @@ const list : QA[] = [
     {
         question: {
             text: "Do you like bottoms?",
-            audio: new Audio( require('@/assets/audio/bottoms-question.mp3') )
+            audio: new Audio( require('@/assets/audio/bottoms-question.mp3') ),
+            chara: 'girl'
         },
         answer: {
             type: AnswerType.Gross,
