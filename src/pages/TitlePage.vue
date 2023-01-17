@@ -1,13 +1,20 @@
 <template>
     <PlayArea theme="grey">
         <h1>😀 Yes or No 🤮</h1>
-        <div class="list" @click="nav.goto(Page.Question)">Would you like?</div>
+        <div class="list" @click="start()">Would you like?</div>
     </PlayArea>
 </template>
 
 <script setup>
 import PlayArea from '@/components/PlayArea.vue';
 import nav, { Page } from '@/utils/nav';
+import Questions from '@/questions';
+
+const start = () => {
+    Questions.init();
+    nav.goto(Page.Question);
+}
+
 </script>
 
 <style scoped>

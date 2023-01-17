@@ -1,3 +1,5 @@
+import { ref } from "vue";
+
 export enum AnswerType {
     Gross = 'gross',
     Normal = 'normal'
@@ -168,4 +170,32 @@ const list : QA[] = [
 export const newQuestion = () : QA => {
     const r = Math.floor(Math.random() * list.length);
     return list[r];
+}
+
+const iterator = ref(0);
+const score = ref(0);
+
+export default {
+    init() {
+        iterator.value = 0;
+        score.value = 0;
+    },
+    nextQuestion() {
+        iterator.value++;
+    },
+    getQuestion() {
+        return list[iterator.value];
+    },
+    hasMore() {
+        if (iterator.value < list.length - 1) {
+            return true;
+        }
+        return false;
+    },
+    pointUp() {
+        score.value++;
+    },
+    score() {
+        return score.value;
+    }
 }

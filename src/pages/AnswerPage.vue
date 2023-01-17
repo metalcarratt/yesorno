@@ -9,25 +9,26 @@
 </template>
 
 <script setup>
-import Answer from '../questions';
 import SpeechBox from '@/components/SpeechBox.vue';
 import ButtonBox from '@/components/ButtonBox.vue';
 import CharacterImage from '@/components/CharacterImage.vue';
 import PlayArea from '@/components/PlayArea.vue';
 import ButtonsWrapper from '@/components/ButtonsWrapper.vue';
-import { defineProps, defineEmits } from 'vue';
+import { defineProps, defineEmits, computed } from 'vue';
+import Questions from '@/questions';
 
 const props = defineProps({
-    answer: Answer,
     choice: String
 });
 
+const AnswerT = computed(() => Questions.getQuestion().answer);
+
 const emit = defineEmits(['next']);
 
-const answer = props.choice === 'yes' ? props.answer.yes : props.answer.no;
+const answer = props.choice === 'yes' ? AnswerT.value.yes : AnswerT.value.no;
 
 const theme = () => {
-    if (props.answer.type === 'gross') {
+    if (AnswerT.value.type === 'gross') {
         if (props.choice === 'yes') {
             return 'red'
         } else {
@@ -44,9 +45,9 @@ const theme = () => {
 
 const playSound = () => {
     if (props.choice === 'yes') {
-        props.answer.yesAudio.play();
+        AnswerT.value.yesAudio.play();
     } else {
-        props.answer.noAudio.play();
+        AnswerT.value.noAudio.play();
     }
 }
 

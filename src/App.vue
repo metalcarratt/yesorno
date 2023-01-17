@@ -5,17 +5,19 @@
     />
 
     <QuestionPage
-      :question="question.question"
       @yes="chooseYes"
       @no="chooseNo"
       v-else-if="nav.at(Page.Question)"
     />
 
     <AnswerPage
-      :answer="question.answer"
       :choice="choice"
       @next="nextQuestion"
       v-else-if="nav.at(Page.Answer)"
+    />
+
+    <ResultPage
+      v-else-if="nav.at(Page.Result)"
     />
 
 </template>
@@ -24,26 +26,40 @@
 import TitlePage from './pages/TitlePage.vue';
 import QuestionPage from './pages/QuestionPage.vue';
 import AnswerPage from './pages/AnswerPage.vue';
-import { newQuestion } from './questions';
+import ResultPage from './pages/ResultPage.vue';
+import Questions, { AnswerType } from './questions';
 import { ref } from 'vue';
 import nav, { Page } from '@/utils/nav';
 
-const question = ref(newQuestion());
 const choice = ref('');
 
 const chooseYes = () => {
   choice.value = 'yes';
-  nav.goto(Page.Answer);
+  if (Questions.getQuestion().answer.type === AnswerType.Normal) {
+    Questions.pointUp();
+  }
+  if (Questions.hasMore()) {
+    nav.goto(Page.Answer);
+  } else {
+    nav.goto(Page.Result);
+  }
 }
 const chooseNo = () => {
   choice.value = 'no';
-  nav.goto(Page.Answer);
+  if (Questions.getQuestion().answer.type === AnswerType.Gross) {
+    Questions.pointUp();
+  }
+  if (Questions.hasMore()) {
+    nav.goto(Page.Answer);
+  } else {
+    nav.goto(Page.Result);
+  }
 }
 
 const nextQuestion = () => {
   choice.value = '';
   nav.goto(Page.Question);
-  question.value = newQuestion();
+  Questions.nextQuestion();
 }
 </script>
 
