@@ -38,28 +38,25 @@ const chooseYes = () => {
   if (Questions.getQuestion().answer.type === AnswerType.Normal) {
     Questions.pointUp();
   }
-  if (Questions.hasMore()) {
-    nav.goto(Page.Answer);
-  } else {
-    nav.goto(Page.Result);
-  }
+  nav.goto(Page.Answer);
 }
+
 const chooseNo = () => {
   choice.value = 'no';
   if (Questions.getQuestion().answer.type === AnswerType.Gross) {
     Questions.pointUp();
   }
-  if (Questions.hasMore()) {
-    nav.goto(Page.Answer);
-  } else {
-    nav.goto(Page.Result);
-  }
+  nav.goto(Page.Answer);
 }
 
 const nextQuestion = () => {
   choice.value = '';
-  nav.goto(Page.Question);
-  Questions.nextQuestion();
+  if (Questions.hasMore()) {
+    Questions.nextQuestion();
+    nav.goto(Page.Question);
+  } else {
+    nav.goto(Page.Result);
+  }
 }
 </script>
 

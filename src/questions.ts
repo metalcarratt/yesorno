@@ -167,16 +167,16 @@ const list : QA[] = [
     }
 ]
 
-export const newQuestion = () : QA => {
-    const r = Math.floor(Math.random() * list.length);
-    return list[r];
-}
-
 const iterator = ref(0);
 const score = ref(0);
+let randomisedList : QA[];
 
 export default {
     init() {
+        randomisedList = list
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
         iterator.value = 0;
         score.value = 0;
     },
@@ -184,10 +184,10 @@ export default {
         iterator.value++;
     },
     getQuestion() {
-        return list[iterator.value];
+        return randomisedList[iterator.value];
     },
     hasMore() {
-        if (iterator.value < list.length - 1) {
+        if (iterator.value < randomisedList.length - 1) {
             return true;
         }
         return false;
